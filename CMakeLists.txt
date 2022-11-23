@@ -70,15 +70,37 @@ endif()
 # benchmark executable
 ################################
 file(GLOB_RECURSE stations-benchmark-files
-        src/cmd/*.cc
+        src/cmd/benchmark/*.cc
         )
 add_executable(stations-benchmark ${stations-benchmark-files})
 target_include_directories(stations-benchmark PUBLIC include)
 target_link_libraries(stations-benchmark
         ${CMAKE_THREAD_LIBS_INIT}
-        osmium
         )
 target_compile_features(stations-benchmark PUBLIC cxx_std_17)
 set_target_properties(stations-benchmark PROPERTIES CXX_EXTENSIONS OFF)
 target_compile_options(stations-benchmark PRIVATE ${stations-compile-flags})
 target_compile_definitions(stations-benchmark PRIVATE ${stations-compile-definitions})
+
+################################
+# preprocess executable
+################################
+file(GLOB_RECURSE stations-preprocess-files
+        src/cmd/preprocess/*.cc
+        src/preprocessing/*.cc
+        )
+add_executable(stations-preprocess ${stations-preprocess-files} src/preprocessing/preprocessing.cc)
+target_include_directories(stations-preprocess PUBLIC include)
+target_link_libraries(stations-preprocess
+        zlibstatic
+        ${CMAKE_THREAD_LIBS_INIT}
+        osmium
+        boost
+        boost-filesystem
+        boost-iostreams
+        protozero
+        )
+target_compile_features(stations-preprocess PUBLIC cxx_std_17)
+set_target_properties(stations-preprocess PROPERTIES CXX_EXTENSIONS OFF)
+target_compile_options(stations-preprocess PRIVATE ${stations-compile-flags})
+target_compile_definitions(stations-preprocess PRIVATE ${stations-compile-definitions})

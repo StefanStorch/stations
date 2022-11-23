@@ -1,0 +1,16 @@
+[libosmium]
+  url=git@github.com:motis-project/libosmium.git
+  branch=main
+  commit=bc09725a4636d5036bfed30de2db0764cdff2de9
+[boost]
+  url=git@github.com:motis-project/boost.git
+  branch=master
+  commit=ad6cbb38470efd74265715e0972cb5ae44527fb1
+[zlib]
+  url=git@github.com:motis-project/zlib.git
+  branch=master
+  commit=1e1dfdedddb54a2e2cb8fec3b67f925233c495aa
+[protozero]
+  url=git@github.com:motis-project/protozero.git
+  branch=master
+  commit=8c9f3fa97c2cfdceef86d0b61818ae98e9328f29
