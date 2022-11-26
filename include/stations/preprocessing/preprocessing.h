@@ -10,6 +10,7 @@ struct preprocessing_result {
     }
 
     bool successful_{false};
+    int num_entries_{0};
     std::unordered_map<std::string, station> stations_{};
 };
 
