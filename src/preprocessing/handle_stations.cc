@@ -16,10 +16,10 @@ namespace stations::preprocessing {
         if (tags->has_key("name") && tags->has_key("ref")) {
             if (map.count(relation.get_value_by_key("name"))) {
                 auto station = map.find(relation.get_value_by_key("name"));
-                station->second.platforms_.insert({relation.get_value_by_key("ref"), relation.id()});
+                station->second.add_platform(relation.get_value_by_key("ref"), relation.id());
             } else {
                 auto temp_station = station{};
-                temp_station.platforms_.insert({relation.get_value_by_key("ref"), relation.id()});
+                temp_station.add_platform(relation.get_value_by_key("ref"), relation.id());
                 map.insert({relation.get_value_by_key("name"), temp_station});
             }
             return count;

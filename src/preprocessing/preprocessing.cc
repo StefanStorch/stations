@@ -50,16 +50,16 @@ public:
             if (result_->stations_.count(name) > 0) {
                 auto station = result_->stations_.find(name);
                 if (relation.tags().has_key("ref")) {
-                    station->second.platforms_.insert({relation.get_value_by_key("ref"), relation.id()});
+                    station->second.add_platform(relation.get_value_by_key("ref"), relation.id());
                 } else {
-                    station->second.platforms_.insert({"-1", relation.id()});
+                    station->second.add_platform("-1", relation.id());
                 }
             } else {
                 auto temp_station = station{};
                 if (relation.tags().has_key("ref")) {
-                    temp_station.platforms_.insert({relation.get_value_by_key("ref"), relation.id()});
+                    temp_station.add_platform(relation.get_value_by_key("ref"), relation.id());
                 } else {
-                    temp_station.platforms_.insert({"-1", relation.id()});
+                    temp_station.add_platform("-1", relation.id());
                 }
                 result_->stations_.insert({name, temp_station});
             }
@@ -86,16 +86,16 @@ public:
             if (result_->stations_.count(name) > 0) {
                 auto station = result_->stations_.find(name);
                 if (node.tags().has_key("ref")) {
-                    station->second.platforms_.insert({node.get_value_by_key("ref"), node.id()});
+                    station->second.add_platform(node.get_value_by_key("ref"), node.id());
                 } else {
-                    station->second.platforms_.insert({"-1", node.id()});
+                    station->second.add_platform("-1", node.id());
                 }
             } else {
                 auto temp_station = station{};
                 if (node.tags().has_key("ref")) {
-                    temp_station.platforms_.insert({node.get_value_by_key("ref"), node.id()});
+                    temp_station.add_platform(node.get_value_by_key("ref"), node.id());
                 } else {
-                    temp_station.platforms_.insert({"-1", node.id()});
+                    temp_station.add_platform("-1", node.id());
                 }
                 result_->stations_.insert({name, temp_station});
             }
@@ -116,16 +116,16 @@ public:
             if (result_->stations_.count(name) > 0) {
                 auto station = result_->stations_.find(name);
                 if (way.tags().has_key("ref")) {
-                    station->second.platforms_.insert({way.get_value_by_key("ref"), way.id()});
+                    station->second.add_platform(way.get_value_by_key("ref"), way.id());
                 } else {
-                    station->second.platforms_.insert({"-1", way.id()});
+                    station->second.add_platform("-1", way.id());
                 }
             } else {
                 auto temp_station = station{};
                 if (way.tags().has_key("ref")) {
-                    temp_station.platforms_.insert({way.get_value_by_key("ref"), way.id()});
+                    temp_station.add_platform(way.get_value_by_key("ref"), way.id());
                 } else {
-                    temp_station.platforms_.insert({"-1", way.id()});
+                    temp_station.add_platform("-1", way.id());
                 }
                 result_->stations_.insert({name, temp_station});
             }
@@ -265,9 +265,9 @@ struct multipolygon_way_manager
             }
         } else {
             if (obj->type() == item_type::way) {
-                station.platforms_.insert({obj->get_value_by_key("ref"), obj->id()});
+                station.add_platform(obj->get_value_by_key("ref"), obj->id());
             } else {
-                station.platforms_.insert({"-1", obj->id()});
+                station.add_platform("-1", obj->id());
             }
             count++;
         }
