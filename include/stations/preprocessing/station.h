@@ -10,6 +10,9 @@ namespace stations::preprocessing {
         station() = default;
 
         bool add_platform(std::string const& in_name, std::int64_t const& id) {
+            /* TODO when no viable platform is found this could be called multiple times with in_name="-1"
+                 * with different ids what should be done in this case?
+                 * */
             bool success = false;
             std::vector<std::string> names{};
             if (in_name.find(';') == std::string::npos) {
@@ -35,11 +38,16 @@ namespace stations::preprocessing {
             if (platforms_.count(platform) > 0) {
                 return platforms_.at(platform);
             }
+            // if the given platform does not exist at this station it checks whether an unnamed platform exists
+            if (platforms_.count("-1") > 0) {
+                return platforms_.at("-1");
+            }
             return -1;
         }
 
         bool bus_{false};
         bool railway_{false};
+        // the string "-1" represents an unknown platform name
         std::unordered_map<std::string, std::int64_t> platforms_{};
     };
 } // stations::preprocessing
